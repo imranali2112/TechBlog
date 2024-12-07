@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Pure white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .signup-container {
+            background: #f8f8f8; /* Slightly off-white for contrast */
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .signup-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #444; /* Neutral dark gray for heading */
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6e8efb;
+            box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+        }
+
+        .btn-submit {
+            background: #6e8efb;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: #5b78e4;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #6e8efb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 480px) {
+            /* Add padding to the container to prevent it from touching the sides of the screen */
+            .signup-container {
+                padding: 20px;
+                max-width: 100%;
+                box-shadow: none;
+                margin: 0 10px; /* Add side margins for smaller screens */
+            }
+
+            .signup-container h1 {
+                font-size: 1.5em;
+            }
+
+            .form-group input {
+                font-size: 0.9em;
+            }
+
+            .btn-submit {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            .login-link {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                padding: 20px 30px;
+                margin: 0 20px; /* Slightly larger margin for tablets */
+            }
+
+            .signup-container h1 {
+                font-size: 1.8em;
+            }
+
+            .form-group input {
+                font-size: 1em;
+            }
+
+            .btn-submit {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        
+        <form action="/signup_view" method="POST" class="signup-form">
+            {% for message in messages %}
+            <script>
+                alert("{{ message }}");
+            </script>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="btn-submit">Sign Up</button>
+            <p class="login-link">Already have an account? <a href="{% url 'login_view' %}">Log in</a></p>
+        </form>
+    </div>
+</body>
+</html>

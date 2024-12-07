@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* White background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .login-container {
+            background: #f8f8f8;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6e8efb;
+            box-shadow: 0 0 5px rgba(110, 142, 251, 0.5);
+        }
+
+        .btn-login {
+            background: #6e8efb;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: #5b78e4;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #6e8efb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 480px) {
+            /* Add padding to the container to prevent it from touching the sides of the screen */
+            .login-container {
+                padding: 20px;
+                max-width: 100%;
+                box-shadow: none;
+                margin: 0 10px; /* Add side margins for smaller screens */
+            }
+
+            .login-container h1 {
+                font-size: 1.5em;
+            }
+
+            .form-group input {
+                font-size: 0.9em;
+            }
+
+            .btn-login {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+
+            .signup-link {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 20px 30px;
+                margin: 0 20px; /* Slightly larger margin for tablets */
+            }
+
+            .login-container h1 {
+                font-size: 1.8em;
+            }
+
+            .form-group input {
+                font-size: 1em;
+            }
+
+            .btn-login {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% for message in messages %}
+    <script>
+        alert("{{message}}");
+    </script>
+    {% endfor %}
+    <div class="login-container">
+        <h1>Login</h1>
+        <a href="{% url 'index'%}">Home</a>
+        <form action="/login_view" method="POST" class="login-form">
+            {% csrf_token %} 
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+            <p class="signup-link">Don't have an account? <a href="signup_view">Sign up</a></p>
+        </form>
+    </div>
+</body>
+</html>

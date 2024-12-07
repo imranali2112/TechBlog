@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <style>
+        .blog-container {
+            text-align: center; /* Center the content horizontally */
+            margin-bottom: 30px;
+        }
+
+        .blog-container h1 {
+            font-size: 2.5em; /* Adjust size for the title */
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+            gap: 20px;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            height: 500px; /* Fixed height for uniform appearance */
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover; /* Ensures the image is well-scaled */
+        }
+
+        .blog-card h2 {
+            font-size: 1.8em;
+            margin: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .blog-meta {
+            font-size: 1em;
+            color: #666;
+            margin: 0 15px 15px;
+            text-align: center;
+        }
+
+        .blog-meta span {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .blog-meta a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .blog-meta a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .blog-container h1 {
+                font-size: 2em;
+            }
+
+            .blog-card h2 {
+                font-size: 1.5em;
+            }
+
+            .blog-card img {
+                height: 200px;
+            }
+
+            /* Stack blog cards vertically for smaller screens */
+            .blog-grid {
+                grid-template-columns: 1fr; /* 1 column for small screens */
+            }
+
+            .blog-card {
+                height: auto; /* Allow flexible height on small screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="blog-container">
+        <h1>Our Latest Blogs</h1>
+        <div class="blog-grid">
+                {% for blog in blogs %}
+                    <div class="blog-card">
+                        <img src="{{ blog.image.url }}" alt="Image for blog titled {{ blog.title }}">
+                        <a href="{% url 'blog_detail' blog.id %}">
+                            <h2>{{ blog.title }}</h2>
+                        </a>
+                        <p class="blog-meta">
+                            {{ blog.upload_at|date:"M d, Y" }} | 
+                            <a href="#">By Admin</a>
+                        </p>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

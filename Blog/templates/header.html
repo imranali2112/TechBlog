@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <style>
+        /* Header Styles (same as your existing header CSS) */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .logo-container img {
+            width: 35px;
+            height: auto;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .logo-container h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: normal;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #f4f4f4;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://www.seoclerk.com/pics/653973-1pMc8u1548606687.jpg" alt="Logo">
+                <h1>Blogs</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about'%}" class="{% if request.path == '/about/' %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'blog'%}" class="{% if request.path == '/blog/' %}active{% endif %}">Blog</a></li>
+                    <li><a href="{% url 'contact'%}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_staff %}
+                            <li><a href="/admin/">Admin Dashboard</a></li>
+                        {% else %}
+                            <li><a href="{% url 'profile' %}">Profile</a></li> 
+                        {% endif %}
+                    {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout_view'%}">Logout</a></li>
+                        {{ user.username }}
+                    {% else %}
+                        <li><a href="{% url 'signup_view'%}">Signup</a></li>
+                        <li><a href="{% url 'login_view'%}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Detail Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .blog-container {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .blog-header {
+            text-align: left; /* Aligns title and date to the left */
+            margin-bottom: 10px; /* Reduces spacing below the header */
+        }
+
+        .blog-title {
+            font-size: 2rem;
+            margin: 0;
+            color: #333;
+            text-align: left;
+        }
+
+        .blog-date {
+            font-size: 0.9rem;
+            color: #777;
+            margin: 10px 5px -45px 0; /* Adds space between date and content */
+            text-align: left;
+        }
+
+        .blog-content {
+            margin-top: 0; /* Starts content immediately below the header */
+        }
+
+        .blog-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: justify;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 30px 0;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        .comments-header {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .comment-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .comment-date {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .comment-text {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .comment-form {
+            margin-top: 30px;
+        }
+
+        .comment-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            font-size: 1rem;
+            line-height: 1.6;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .comment-submit {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .auth-message {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .auth-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-header">
+            <h1 class="blog-title">{{ blog.title }}</h1>
+            <p class="blog-date">{{ blog.upload_at|date:"M d, Y" }}</p>
+        </div>
+        <div class="blog-content">
+            <div class="blog-text">
+                <p>{{ blog.content }}</p>
+            </div>
+        </div>
+        <hr>
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h2 class="comments-header"> Comments</h2>
+            {% for comment in blog.comments.all %}
+            
+            <div class="comment-item">
+                <div class="comment-icon">
+                    {{ comment.user.username|slice:":1" }}
+                </div>
+                <div class="comment-content">
+                    <p class="comment-author">{{ comment.user.username }}</p>
+                    
+                    <p class="comment-text">{{ comment.content }}</p>
+                    <p class="comment-date"> {{ comment.created_at|date:"F j, Y, g:i a" }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </div>
+
+        <!-- Comment Form -->
+        {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="comment-form">
+                <textarea name="content" id="content" class="comment-textarea" placeholder="Write your comment here..."></textarea>
+                <button type="submit" class="comment-submit">Post Comment</button>
+            </div>
+        </form>
+        
+        {% else %}
+        <div class="auth-message">
+            Please <a href="{% url 'login_view' %}" class="auth-link">Login</a> to leave a comment.
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

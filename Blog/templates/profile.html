@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        .profile-container {
+            max-width: 400px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-header h2 {
+            margin: 10px 0;
+        }
+
+        .profile-header p {
+            color: gray;
+            font-size: 14px;
+        }
+
+        .profile-details {
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .profile-actions .btn {
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .profile-actions .edit-profile {
+            background-color: #4CAF50;
+        }
+
+        .profile-actions .logout {
+            background-color: #f44336;
+            margin-left: 10px;
+        }
+        .profile-actions {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .btn {
+            text-decoration: none; /* Removes the underline */
+            display: inline-block;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px; /* Adds space between buttons */
+            transition: background-color 0.3s ease;
+        }
+        .btn.edit-profile {
+            background-color: #4CAF50;
+        }
+        .btn.logout {
+            background-color: #f44336;
+        }
+        .btn.home {
+            background-color: #007BFF; /* Blue color for the Home button */
+        }
+        .btn:hover {
+            opacity: 0.9; /* Adds a hover effect */
+        }
+    </style>
+</head>
+<body>
+    {% for profiles in profile %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="{{profiles.image.url}}" alt="User Profile Picture">
+            <h2>{{ user.username}}</h2>
+            <p>{{ profiles.bio }}</p>
+        </div>
+        <div class="profile-details">
+            <p><strong>Phone:</strong> {{ profiles.phone_no }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Address:</strong> {{ profiles.address }}</p>
+        </div>
+        <div class="profile-actions">
+            <a href="{% url 'index'%}" class="btn home">Home</a>
+            <a href="{% url 'edit_profile' %}" class="btn edit-profile">Edit Profile</a>
+            <a href="{% url 'logout_view' %}" class="btn logout">Logout</a>
+          </div>
+          
+    </div>
+    {% endfor %}
+</body>
+</html>

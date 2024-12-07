@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+         
+
+        /* Video Section */
+        .video-section {
+            position: relative;
+            background-color: #000;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .video-section video {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .video-section h2 {
+            color: #fff;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+        }
+
+        .hero p {
+            margin: 10px 0;
+        }
+
+        .hero .btn {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .hero .btn:hover {
+            background: #555;
+        }
+
+        /* Services */
+        .services {
+            margin: 20px 0;
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .service-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+    </style>
+</head>
+<body>
+    {% for message in messages %}
+    <script>
+        alert("{{message}}");
+    </script>
+    {% endfor %}
+    <!-- Header Section -->
+
+     
+    {% include 'header.html' %}
+
+    {% block content %}
+ 
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <h2>Your Journey to Knowledge Starts Here</h2>
+            <p>Explore our content and services to enhance your skills and discover new opportunities.</p>
+            <a href="#services" class="btn">Learn More</a>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <h3>Web Development</h3>
+                    <p>We provide modern web development solutions to help bring your ideas to life.</p>
+                </div>
+                <div class="card">
+                    <h3>Content Writing</h3>
+                    <p>Professional writing services to ensure your message is clear and effective.</p>
+                </div>
+                <div class="card">
+                    <h3>SEO Optimization</h3>
+                    <p>Boost your online presence with our proven SEO strategies.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    {% endblock %}
+
+    {% include 'footer.html' %}
+   
+</body>
+</html>
