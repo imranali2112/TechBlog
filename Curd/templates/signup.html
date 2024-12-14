@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+                    /* General Reset */
+            body {
+                margin: 0;
+                font-family: 'Arial', sans-serif;
+                background: #f7f8fc;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            /* Container */
+            .signup-container {
+                background: #ffffff;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                width: 100%;
+                max-width: 400px;
+                padding: 20px 30px;
+            }
+
+            /* Header */
+            .form-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .form-header h1 {
+                font-size: 1.8rem;
+                margin: 0;
+                color: #333;
+            }
+
+            .form-header p {
+                color: #666;
+                font-size: 0.9rem;
+                margin-top: 5px;
+            }
+
+            /* Form */
+            .signup-form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #555;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                font-size: 1rem;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            input:focus {
+                outline: none;
+                border-color: rgb(19, 42, 42) 255 255;
+                box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+            }
+
+            /* Submit Button */
+            .btn-submit {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: 10px;
+                font-size: 1rem;
+                font-weight: bold;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+            .btn-submit:hover {
+                background-color: #0056b3;
+            }
+
+            /* Login Link */
+            .login-link {
+                text-align: center;
+                margin-top: 15px;
+                font-size: 0.9rem;
+                color: #555;
+            }
+
+            .login-link a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+            .login-link a:hover {
+                text-decoration: underline;
+            }
+
+    </style>
+</head>
+<body>
+    {%for message in messages %}
+        <script>
+        alert('{{message}}');
+        </script>
+    {%endfor%}
+    <div class="signup-container">
+        <div class="form-header">
+            <h1>Create an Account</h1>
+            <p>Join us and start your journey!</p>
+        </div>
+        <form class="signup-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="btn-submit">Sign Up</button>
+            <p class="login-link">Already have an account? <a href="{% url 'login_view'%}">Log in here</a></p>
+        </form>
+    </div>
+</body>
+</html>

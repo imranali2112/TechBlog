@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .student-data {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .summary {
+            margin-top: 20px;
+        }
+        .summary p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Report Card</h1>
+    <div class="student-data" method="POST">
+        {% for student in students %}
+
+        <p><strong>Name:</strong> {{student.std_name}}</p>
+        <p><strong>Father's Name:</strong>  {{student.std_father_name }}</p>
+        <p><strong>Roll Number:</strong> {{student.std_roll_no}}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Naths</td>
+                    <td>{{ student.maths}}</td>
+                </tr>
+                <tr>
+                    <td>English </td>
+                    <td>{{ student.english}}</td>
+                </tr>
+                <tr>
+                    <td>Computer Science</td>
+                    <td>{{ student.computer_science }}</td>
+                </tr>
+                <tr>
+                    <td>Islymat</td>
+                    <td>{{student.islmyast}}</td>
+                </tr>
+                <tr>
+                    <td>Urdu</td>
+                    <td>{{student.urdu}}</td>
+                </tr>
+                <tr>
+                    <td>Pakistan Studies</td>
+                    <td>{{student.pak_study}}</td>
+               </tr>
+            </tbody>
+        </table>
+        <div class="summary">
+            <p><strong>Total Marks:</strong>{{student.total_marks}}</p>
+            <p><strong>Average Marks:</strong>{{student.avg_marks}}</p>
+            <p><strong>Percentage:</strong>{{student.std_percent}}</p>
+        </div>
+        {%endfor%}
+    </div>
+</body>
+</html>

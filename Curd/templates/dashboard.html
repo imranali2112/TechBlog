@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <!-- Display Messages -->
+  {% for message in messages %}
+  <script>
+    alert('{{ message }}');
+  </script>
+  {% endfor %}
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-semibold">User Dashboard</h1>
+      <a href="{% url 'logout_view' %}" class="bg-blue-700 px-4 py-2 rounded-lg hover:bg-blue-800 transition">
+        Logout
+      </a>
+    </div>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <div class="container mx-auto mt-12">
+    <div class="bg-white shadow-lg rounded-xl p-8">
+      <!-- User Profile Section -->
+      <div class="flex items-center border-b pb-6 mb-6">
+        <img
+          src="https://via.placeholder.com/100"
+          alt="User Profile"
+          class="w-28 h-28 rounded-full border-4 border-blue-500 shadow-lg"
+        />
+        <div class="ml-8">
+          <h2 class="text-3xl font-semibold text-gray-800">{{ request.user }}</h2>
+          <p class="text-gray-500">Software Engineer</p>
+        </div>
+      </div>
+
+      <!-- User Details Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Detail Card -->
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg shadow-sm hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold text-blue-600">Email</h3>
+          <p class="text-gray-700 mt-2">johndoe@example.com</p>
+        </div>
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg shadow-sm hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold text-blue-600">Phone</h3>
+          <p class="text-gray-700 mt-2">+123 456 7890</p>
+        </div>
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg shadow-sm hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold text-blue-600">Joined</h3>
+          <p class="text-gray-700 mt-2">January 15, 2024</p>
+        </div>
+        <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg shadow-sm hover:shadow-lg transition">
+          <h3 class="text-lg font-semibold text-blue-600">Role</h3>
+          <p class="text-gray-700 mt-2">Administrator</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex justify-end gap-4">
+        <button class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 transition">
+          Edit Profile
+        </button>
+        <button class="bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-red-600 transition">
+          Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
