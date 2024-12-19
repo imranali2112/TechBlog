@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from .import views
+from .routers import router
 urlpatterns = [
     path('', views.index, name='index'),
     path('blog/', views.blog, name='blog'),
@@ -11,5 +12,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logut_view/', views.logut_view, name='logut_view'),
     path('student/', views.student, name= 'student'),
+    path('employee', views.employe, name='employee'),
+    path('job', views.job, name = 'job'),
+    path('api/', include(router.urls)),
 
 ]

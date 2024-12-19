@@ -52,4 +52,22 @@ class Student(models.Model):
     def total_marks(self):
         total = self.english + self.urdu + self.maths + self.computer_science + self.islmyast + self.pak_study
         return total
+    
+class Employe(models.Model):
+    employe_name = models.CharField(max_length=200)
+    employe_dep = models.CharField(max_length=200)
+    employe_age = models.CharField(max_length=200)
+    employe_address = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.employe_name
+    
+
+class Job(models.Model):
+    title = models.CharField(max_length=200)
+    decription = models.TextField()
+    dep = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
 

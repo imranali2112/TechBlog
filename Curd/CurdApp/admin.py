@@ -3,6 +3,9 @@ from .import models
 # Register your models here.
 admin.site.register(models.About)
 admin.site.register(models.Blog)
+admin.site.register(models.Employe)
+
+admin.site.register(models.Job)
 
 @admin.register(models.Student)
 class StudentAdmin(admin.ModelAdmin):

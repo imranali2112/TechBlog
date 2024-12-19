@@ -3,6 +3,7 @@ from .import models
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from .forms import EmployeForm, JobForm
 
 # Create your views here.
 
@@ -117,4 +118,26 @@ def student(request):
     return render(request, 'student.html', context)
 
 
+
+def employe(request):
+    if request.method == 'POST':
+        form = EmployeForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    return render(request, 'employee.html', {'form': form})
+
+def job(request):
+    if request.method == 'POST':
+        form = JobForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = JobForm()
+    context = {
+        'form': form
+    }
+        
+    return render(request, 'job.html',context )
 
